@@ -9,6 +9,8 @@ http.createServer(function(request, response)
 // Discord bot implements
 const discord = require('discord.js');
 const client = new discord.Client();
+const { prefix, token } = require('./config.json');
+const HandleOrder = require('./handle_order.js');
 
 client.on('ready', message =>
 {
@@ -63,7 +65,7 @@ client.on('message', message =>
 	}
   
   //ワンライのお題を出すプログラム、いずれは時間帯指定もしたい
-  if(message.content.match(/？ワンライお題/)&& message.author != client.user){
+  if(message.content.match(/!onewrite/)&& message.author != client.user){
   
   	var genre = [
 		  "不問",
@@ -301,252 +303,10 @@ client.on('message', message =>
     return;
   }
   
-     
-    function formatDate(date) {
-    const y = date.getFullYear()
-    const m = date.getMonth() + 1
-    const d = date.getDate();
-    const day = '日月火水木金土'.charAt(date.getDay());
-    return `${y}年${m}月${d}日 (${day})`;
+	//musicbotの機能 ※テスト中
+	if (message.content.startsWith(prefix)) {
+    HandleOrder.call(message);
   }
-    var h = new Date().getHours();
-  const date = new Date();
-  console.log(formatDate(date));
-     if('日月火水木金土'.charAt(date.getDay()) == "土", h==13){
-       
-    var genre = [
-		  "不問",
-      "あなたの一番好きなキャラ",
-	  	"旧作キャラ",
-	  	"紅魔郷キャラ",
-	  	"妖々夢キャラ",
-	  	"萃夢想キャラ",
-	  	"永夜抄キャラ",
-	  	"花映塚キャラ",
-	  	"文花帖・ダブルスポイラーキャラ",
-	  	"風神録キャラ",
-	  	"緋想天・非想天則キャラ",
-	  	"地霊殿キャラ",
-	  	"星蓮船キャラ",
-	  	"妖精大戦争キャラ",
-	  	"神霊廟キャラ",
-	  	"心綺楼キャラ",
-	  	"輝針城キャラ",
-	  	"弾幕アマノジャクキャラ",
-	  	"深秘録キャラ",
-	  	"紺珠伝キャラ",
-	  	"憑依華キャラ",
-	  	"天空璋キャラ",
-	  	"秘封ナイトメアダイアリーキャラ",
-	  	"鬼形獣キャラ",
-	  	"音楽CD（秘封含む）キャラ",
-	  	"香霖堂キャラ",
-	  	"三月精キャラ",
-	  	"儚月抄キャラ",
-	  	"茨華仙キャラ",
-	  	"鈴奈庵キャラ",
-	  	"智霊奇伝キャラ",
-	  	"酔蝶華キャラ",
-      "霊夢を出さない（メイン・モブを問わず）",
-      "紅魔郷のボスキャラ（ポジ不問）",
-	  ];
-    
-    var scene = [
-	  	"入浴",
-	  	"飲酒",
-	  	"ベルが鳴る場面から開始",
-	  	"夢の中（自覚の有無は不問）",
-	  	"朝",
-	  	"路上",
-	  	"不問",
-      "幻想郷",
-	];
-    
-    var theme = [
-		  "不問",
-	  	"救う",
-	  	"遭遇",
-	  	"才能",
-	  	"時間",
-	  	"科学",
-	  	"記録",
-	  	"朝食",
-	  	"「」の使用禁止",
-      "泥酔",
-      "ショット",
-      "省略",
-      "いと",
-      "祈り",
-      "さびる",
-      "しみ",
-      "壁",
-      "笑",
-      "苦",
-      "行事",
-      "絶景",
-      "本能",
-      "リメイク",
-      "水晶",
-      "師匠",
-      "立秋",
-      "煙草",
-      "大失敗",
-      "箱庭",
-      "ゴミ",
-      "嘘",
-      "多い",
-      "あかり",
-      "祭り",
-    ];
-    
-    var key = [
-	  	"火",
-	  	"水",
-	  	"人",
-	  	"サイド",
-	  	"ロック",
-	  	"トリガー",
-	  	"不滅",
-	  	"危険",
-	  	"黒",
-	  	"性格",
-	  	"記憶",
-	  	"特異",
-	  	"振る",
-	  	"回す",
-	  	"潰す",
-	  	"理性",
-	  	"散歩",
-	  	"光",
-	  	"輝き",
-	  	"不可",
-	  	"トップ",
-	  	"納戸",
-	  	"砂糖",
-	  	"炊き",
-	  	"舞台",
-	  	"メモ",
-	  	"陸",
-	  	"海",
-	  	"空",
-	  	"友",
-	  	"努",
-	  	"勝",
-	  	"気",
-	  	"液",
-	  	"固",
-	  	"晴",
-		  "雨",
-		  "曇",
-      "オフ",
-      "風",
-      "区別",
-      "斜め",
-      "早朝",
-      "生卵",
-      "雲",
-      "骨",
-      "露",
-      "紙",
-      "都合",
-      "愛",
-      "鈴",
-      "境",
-      "幻",
-      "九十九",
-      "目",
-      "耳",
-      "本",
-      "太陽",
-      "猫",
-      "肩",
-      "足",
-      "指",
-      "空虚",
-      "残酷",
-      "知",
-      "上",
-      "下",
-      "管理",
-      "権限",
-      "春",
-      "秋刀魚",
-      "荷物",
-      "櫛",
-      "禁止",
-      "音楽",
-      "悪役",
-      "乙女",
-      "動画",
-      "準備",
-      "滴",
-      "オマケ",
-      "所在",
-      "針",
-      "図星",
-      "噂",
-      "足跡",
-      "超越",
-      "回る",
-      "三度",
-      "地図",
-      "梅",
-      "浴槽",
-      "火星",
-      "板",
-      "タオル",
-      "箱庭",
-      "文",
-      "午前4時",
-      "紅葉",
-      "新しい",
-      "旅",
-      "部室",
-      "庭",
-      "氷",
-      "先祖",
-      "小指",
-      "時計",
-      "霞",
-      "泡",
-	];
-   
-    var randomg = Math.floor( Math.random() * genre.length);
-    var randoms = Math.floor( Math.random() * scene.length);
-    var randomt = Math.floor( Math.random() * theme.length);
-       
-    
-    var keyflag =true;
-    while ( keyflag ){
-      var randomk = Math.floor( Math.random() * key.length);
-      var randome = Math.floor( Math.random() * key.length);
-      var randomy = Math.floor( Math.random() * key.length); 
-      
-      if(!(randomk == randome , randome == randomy , randomy == randomk)){
-        var ky = "【必須キーワード3種】\n" + "　" + key[randomk] + "　" + key[randome] + "　" + key[randomy];
-        keyflag = false;
-      }
-    }
-
-    
-    let gr = "【登場人物】\n" + "　" + genre[randomg];
-    let sn = "【環境】\n" + "　" + scene[randoms];
-    let tm = "【テーマ】\n" + "　" + theme[randomt];
-    
-    client.channels.get("489800717675134979").send("\n================================================\n【古明地さとりの挑戦状】\n　下記条件で1時間以内に1000文字以内の即興作品を完成させよ\n\n" +
-                  gr + "\n\n"+ 
-                  
-                  sn + "\n\n" + 
-                  
-                  tm + "\n\n" + 
-                  
-                  ky + 
-                  "\n================================================\n出来上がったら下の"+"<#489801186174828555>"+"に投稿してください\n終了後、他者の作品感想は"+"<#490450418376376336>"+"によろしくお願いします\n\n" +
-                  "原稿を書く際は以下を参考にしてくださいね\n" +
-                 "-----------------------------------------------\n【タイトル】\n\n【著者】\n\n【主演】\n\n【本文】\n\n-----------------------------------------------\n"　+
-                 "文字数の確認は所有ソフトか下記ページを参照すると便利かもしれないわね\nhttp://www1.odn.ne.jp/megukuma/count.htm\n\n" 
-                 );
-   }
    
     return;
 });
