@@ -9,8 +9,9 @@ http.createServer(function(request, response)
 // Discord bot implements
 const discord = require('discord.js');
 const client = new discord.Client();
-const { prefix, token } = require('./config.json');
-const HandleOrder = require('./handle_order.js');
+const token = 'MzU2MDgxNjQyNDQ5NjY2MDUw.Xtsx2w.mXCOms8EWBzbgpogsrO-0XD0m_o'
+//const prefix = '!';
+//const HandleOrder = require('./handle_order.js');
 
 client.on('ready', message =>
 {
@@ -304,18 +305,18 @@ client.on('message', message =>
   }
   
 	//musicbotの機能 ※テスト中
-	if (message.content.startsWith(prefix)) {
-    HandleOrder.call(message);
-  }
+//	if (message.content.startsWith(prefix)) {
+//    HandleOrder.call(message);
+//  }
    
-    return;
+//    return;
 });
   
  
-if(process.env.DISCORD_BOT_TOKEN == undefined)
+if(token == undefined)
 {
 	console.log('please set ENV: DISCORD_BOT_TOKEN');
 	process.exit(0);
 }
 
-client.login( process.env.DISCORD_BOT_TOKEN );
+client.login( token );

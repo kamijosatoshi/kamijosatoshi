@@ -1,4 +1,4 @@
-const { prefix } = require('./config.json');
+const prefix = '!';
 const ytdl = require('ytdl-core');
 
 module.exports = {
