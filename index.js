@@ -9,7 +9,7 @@ http.createServer(function(request, response)
 // Discord bot implements
 const discord = require('discord.js');
 const client = new discord.Client();
-const token = 'MzU2MDgxNjQyNDQ5NjY2MDUw.Xtsx2w.mXCOms8EWBzbgpogsrO-0XD0m_o'
+const token = process.env.DISCORD_BOT_TOKEN;
 //const prefix = '!';
 //const HandleOrder = require('./handle_order.js');
 
